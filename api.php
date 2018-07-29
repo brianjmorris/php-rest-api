@@ -1,5 +1,6 @@
 <?php
 
+// database connection
 $host = "localhost";
 $db = "databaseName";
 $username = "username";
@@ -9,10 +10,12 @@ $password = "password";
 $tablename = "tableName";
 
 // table columns, id column needs to be first
-$columns = [ "itemid", "columnOne", "language" ];
+$columns = [ "itemid", "columnTwo", "columnThree" ];
 
+// end configuration
 /*****************************************************************************/
 
+// create PDO object for database connection
 try {
     $dbh = $conn = new PDO("mysql:dbname=$db;host=$host", $username, $password);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -21,8 +24,10 @@ try {
     exit(1);
 }
 
+// get body of request
 $requestBody = json_decode(file_get_contents('php://input'), true);
 
+// count the number of columns
 $columnCount = count($columns);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
